@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Climate Crisis test</title>
+<style type="text/css">
+@font-face {
+font-family: climatettf;
+src: url('ClimateCrisisVariableGX.ttf') format("truetype-variations");
+}
+#climate-ttf, #font_editor_box{
+font-family: climatettf;
+font-size: 80px;
+font-variation-settings: 'wght' 1979;
+}
+.slider-year-header, #font_slider{
+	display: inline-block;
+}
+
+.font-align-icon{
+	width:20px;
+}
+
+</style>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"
+/>
+</head>
+<body>
+<!-- Slider for font-weight -->
+<!-- <div class="font-slider-wrapper">
+<label for="font_slider">Change year:</label>
+<p class="slider-year-header">1979</p>
+<input
+id="font_slider"
+name="font-slider"
+type="range"
+min="1975"
+max="2050"
+value="1"
+step="1"
+/>
+<p class="slider-year-header">2050</p>
+</div>
+<p id="climate-ttf">
+The quick brown fox jumped over the melting iceberg
+</p>
+<script type="text/javascript">
+const slider = document.getElementById("font_slider");
+const paragraph = document.getElementById("climate-ttf");
+slider.addEventListener("input", (e) => {
+	paragraph.style.setProperty("font-variation-settings", "'wght'" + e.target.value);
+console.log(e.target.value)
+})
+</script>
+ -->
+ <div class="container text-center">
+         <!--  <p id="font-editor-disclaimer">
+            <img id="icon-info" src="img/icon-info.svg" alt="Info">Try the
+            font yourself. You can change the weight by moving the slider.
+          </p> -->
+
+          <div id="font_editor_box" contenteditable="true" style="height: 290px; overflow-y: hidden; font-variation-settings: &quot;wght&quot; 2024; text-align: center;">Will is the best</div>
+
+          <div id="font-editor-wrapper">
+            <!-- Labels are hidden but kept for screen-readers & SEO purposes -->
+            <!-- STYLES SEPARATELY: FONT-EDITOR.LESS-->
+
+            <!-- Edit sample -button (desktop version) -->
+            <button id="font_edit_desktop" type="button">Edit sample</button>
+
+            <!-- Slider for font-weight -->
+            <div class="font-slider-wrapper">
+              <label for="font_slider">Font:</label>
+              <p class="slider-year-header">1979</p>
+				<input
+				id="font_slider"
+				name="font-slider"
+				type="range"
+				min="1975"
+				max="2050"
+				value="1"
+				step="1"
+				/>              
+				<p class="slider-year-header">2050</p>
+            </div>
+
+            <!-- Edit sample -button (mobile version) -->
+            <button id="font_edit_mobile" type="button">Edit sample</button>
+
+            <!-- Font-align selector -->
+            <div class="font-align-wrapper">
+              <input class="font-align" type="radio" name="font-align" id="align-left" value="align-left">
+              <label class="font-align" for="align-left"><img class="font-align-icon" src="../Assets/images/icon-align-left.svg" alt="Align left"></label>
+
+              <input class="font-align" type="radio" name="font-align" id="align-center" value="align-center" checked="">
+              <label class="font-align" for="align-center"><img class="font-align-icon" src="../Assets/images/icon-align-center.svg" alt="Align Right"></label>
+
+              <input class="font-align" type="radio" name="font-align" id="align-right" value="align-right">
+              <label class="font-align" for="align-right"><img class="font-align-icon" src="../Assets/images/icon-align-right.svg" alt="Align Center"></label>
+            </div>
+
+            <!-- Font-size -dropdown -->
+            <label for="font_size_select">Font size:</label>
+            <select name="font-size-select" id="font_size_select">
+              <option value="font-size-20px">20px</option>
+              <option value="font-size-40px">40px</option>
+              <option value="font-size-60px">60px</option>
+              <option value="font-size-80px" style="display: initial;">80px</option>
+            </select>
+          </div>
+        </div>
+<script type="text/javascript">
+	 // FONT EDITOR DEFAULTS
+
+    var font_editor = document.getElementById("font_editor_box");
+
+
+
+
+        // Set default font size to smaller when opnened on mobile device (screen width less than 768px)
+
+        var font_size_options = document.querySelectorAll("#font_size_select > option");
+
+        $(window).on("load", function () {
+            if(window.innerWidth < 768) {
+                font_size_options[1].selected = true;
+                font_size_options[2].selected = false;
+            } else {
+                font_size_options[1].selected = false;
+                font_size_options[2].selected = true;
+            };
+        });
+
+        $(window).on("resize", function () {
+            if(window.innerWidth < 768) {
+
+                if (font_size_options[3].selected) {
+                    font_size_options[1].selected = true;
+                    $(font_editor).css( "font-size", "40px");
+                }
+                font_size_options[3].style.display = "none";
+            } else {
+                font_size_options[3].style.display = "initial";
+            };
+        // Invoke the resize event immediately
+        }).resize();
+
+
+        
+
+        // Set Font-editor-box default height to auto
+        $(font_editor).each(function () {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+
+        
+
+        // Set character limit for text-editor
+        var max = 90;
+
+        //binding keyup/down events on the contenteditable div
+        $(font_editor).keyup(function(e){ check_charcount(font_editor, max, e); });
+        $(font_editor).keydown(function(e){ check_charcount(font_editor, max, e); });
+
+        function check_charcount(content_id, max, e)
+        {   
+            if(e.which != 8 && $(font_editor).text().length > max) {
+                // $('#'+content_id).text($('#'+content_id).text().substring(0, max));
+                e.preventDefault();
+            }
+        }
+
+
+
+
+
+    // EDIT SAMPLE -BUTTON
+    $('#font_edit_desktop, #font_edit_mobile').on('click',function(){
+        // Select all text
+        window.setTimeout(function() {
+            var sel, range;
+            if (window.getSelection && document.createRange) {
+                range = document.createRange();
+                range.selectNodeContents(font_editor);
+                sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(range);
+            } else if (document.body.createTextRange) {
+                range = document.body.createTextRange();
+                range.moveToElementText(font_editor);
+                range.select();
+            }
+        }, 1);
+    });
+
+
+
+
+    // FONT SLIDER
+    $('#font_slider').on('input',function(){
+        var sliderVal = $(this).val();
+        $(font_editor).css("font-variation-settings", "'wght' " + sliderVal)
+    });
+
+
+
+
+    // FONT ALIGNMENT
+    $('input[name="font-align"').on('input',function(){
+        var radioVal = $(this).val();
+        
+        // Text-align: left, right, center
+        if (radioVal == 'align-left') {
+            $(font_editor).css( "text-align", "left");
+        } else if (radioVal == 'align-right') {
+            $(font_editor).css( "text-align", "right");
+        } else {
+            $(font_editor).css( "text-align", "center");
+        }
+    });
+
+    
+
+
+    // FONT-SIZE
+    $('#font_size_select').on('input',function(){
+        var sizeVal = $(this).val();
+
+        // Resize editor box when font size is changed
+        setTimeout(function() {
+            $(font_editor).each(function () {
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
+            });
+        }, 150)
+        
+        // Change font-size with the dropdown values
+        if (sizeVal == 'font-size-20px') {
+            $(font_editor).css( "font-size", "20px");
+        } else if (sizeVal == 'font-size-40px') {
+            $(font_editor).css( "font-size", "40px");
+        } else if (sizeVal == 'font-size-60px') {
+            $(font_editor).css( "font-size", "60px");
+        } else {
+            $(font_editor).css( "font-size", "80px");
+        }
+    });
+
+
+
+
+    // Text-area auto-sizing
+    $(font_editor).each(function () {
+        this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+    }).on('input', function () {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    }).on('click', function () {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    });
+
+    // Modal
+    var popup = document.querySelectorAll('.popup');
+    var modal = document.getElementById("modal");
+    var modalPlayer = document.getElementById("modalplayer");
+    var vidHero = document.querySelector("#hero-video");
+    var vidImpl = document.querySelector("#implementation-video");
+
+
+    // Loop through popup elements, aka. the video modal elements
+    for (let i = 0; i < popup.length; i++) {
+        popup[i].addEventListener("click", function(e) {
+            e.preventDefault();
+            showModal(popup[i].href);
+        });
+    };
+
+
+    modal.addEventListener("click", function(e) {
+        hideModal();
+    });
+    
+    window.addEventListener('keydown', function(e) {
+        if(e.code == "Escape" || e.which == 27) {
+            hideModal();
+        };
+    });
+
+    function showModal(url) {
+        vidHero.pause();
+        vidImpl.pause();
+
+        if(url.includes('vimeo')) {
+            modalPlayer.src = 'https://player.vimeo.com/video/'+url.match(/[0-9]+/)[0]+'?autoplay=1';
+            modal.style.display = "block";
+        } else if (url.includes('youtu')) {
+            modalPlayer.src = 'https://www.youtube.com/embed/'+url.substr(url.indexOf('v=')+2,11)+'?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0&autoplay=1';
+            modal.style.display = "block";
+        }
+    }
+
+    function hideModal() {
+        vidHero.play();
+        vidImpl.play();
+
+        modalPlayer.src = '';
+        modal.style.display = "none";
+    }
+
+    // Scroll to top
+    document.getElementById("scrollTop").addEventListener("click", function() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    });
+
+    // IE & Edge styling fix; add "IE" class to 
+    if (document.documentMode || /Edge/.test(navigator.userAgent)) {
+        document.body.className = "IE_edge";
+    }
+    if (document.documentMode) {
+        document.body.className += " IE";
+    };
+
+    // FANCYBOX CONFIGURATIONS
+
+    $('[data-fancybox="gallery"]').fancybox({
+        loop: true,
+        infobar: false,
+        transitionEffect: "slide",
+        buttons: [
+            // "zoom",
+            // "share",
+            // "slideShow",
+            //"fullScreen",
+            //"download",
+            // "thumbs",
+            "close"
+        ],
+        btnTpl: {
+            close:
+                '<button data-fancybox-close class="fancybox-button fancybox-button--close" title="{{CLOSE}}"><p>Close</p>' +
+                '<div class="svg-wrapper"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 10.6L6.6 5.2 5.2 6.6l5.4 5.4-5.4 5.4 1.4 1.4 5.4-5.4 5.4 5.4 1.4-1.4-5.4-5.4 5.4-5.4-1.4-1.4-5.4 5.4z"/></svg></div>' +
+                "</button>",
+            arrowLeft:
+                '<button data-fancybox-prev class="fancybox-button fancybox-button--arrow_left" title="{{PREV}}">' +
+                '<div><img src="./img/icon-arw-left.svg"></div>' +
+                "</button>",
+
+            arrowRight:
+                '<button data-fancybox-next class="fancybox-button fancybox-button--arrow_right" title="{{NEXT}}">' +
+                '<div><img src="./img/icon-arw-right.svg"></div>' +
+                "</button>",
+        },
+        video: {
+            tpl:
+              '<video class="fancybox-video" loop muted controlsList="nodownload" poster="{{poster}}">' +
+              '<source src="{{src}}" type="{{format}}" />' +
+              'Sorry, your browser doesn\'t support embedded videos, <a href="{{src}}">download</a> and watch with your favorite video player!' +
+              "</video>",
+            format: "", // custom video format
+            autoStart: true
+        },
+    });
+
+    const slider = document.getElementById("font_slider");
+const paragraph = document.getElementById("climate-ttf");
+slider.addEventListener("input", (e) => {
+	paragraph.style.setProperty("font-variation-settings", "'wght'" + e.target.value);
+console.log(e.target.value)
+})
+</script>
+</body>
+</html>
