@@ -5,8 +5,17 @@
 .intro-text{
     padding: 2% 10%;
 }
+.btn-inline {
+    display:inline-block; 
+}
+
+.col-sm-4 {
+    padding-top: 10%;
+}
 
 a.unstyled{
     text-decoration: none;
     color: black;
+
+
 }
