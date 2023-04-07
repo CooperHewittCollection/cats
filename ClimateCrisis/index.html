@@ -17,9 +17,19 @@ font-variation-settings: 'wght' 1979;
 .slider-year-header, #font_slider{
 	display: inline-block;
 }
+
+.font-slider-wrapper{
+	margin: 0 auto;
+    width: fit-content;
+}
+
+.container{
+	padding: 0 10%;
+}
 </style>
 </head>
 <body>
+	<div class="container">
 <!-- Slider for font-weight -->
 <div class="font-slider-wrapper">
 <label for="font_slider">Change year:</label>
@@ -37,7 +47,7 @@ step="1"
 </div>
 <p id="climate-ttf">
 The quick brown fox jumped over the melting iceberg
-</p>
+</p></div>
 <script type="text/javascript">
 const slider = document.getElementById("font_slider");
 const paragraph = document.getElementById("climate-ttf");

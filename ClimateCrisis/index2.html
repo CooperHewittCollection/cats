@@ -13,6 +13,7 @@ src: url('ClimateCrisisVariableGX.ttf') format("truetype-variations");
 font-family: climatettf;
 font-size: 80px;
 font-variation-settings: 'wght' 1979;
+height: auto !important;
 }
 .slider-year-header, #font_slider{
 	display: inline-block;
@@ -22,6 +23,13 @@ font-variation-settings: 'wght' 1979;
 	width:20px;
 }
 
+.font-slider-wrapper,.font-align-wrapper, .font-size-wrapper{
+ display: inline-block;
+}
+
+.container{
+    padding: 10%;
+}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
@@ -64,7 +72,7 @@ console.log(e.target.value)
             font yourself. You can change the weight by moving the slider.
           </p> -->
 
-          <div id="font_editor_box" contenteditable="true" style="height: 290px; overflow-y: hidden; font-variation-settings: &quot;wght&quot; 2024; text-align: center;">Will is the best</div>
+          <div id="font_editor_box" contenteditable="true" style="overflow-y: hidden; font-variation-settings: 'wght' 2024; text-align: center;">Enter your own text</div>
 
           <div id="font-editor-wrapper">
             <!-- Labels are hidden but kept for screen-readers & SEO purposes -->
@@ -72,7 +80,7 @@ console.log(e.target.value)
 
             <!-- Edit sample -button (desktop version) -->
             <button id="font_edit_desktop" type="button">Edit sample</button>
-
+<br>
             <!-- Slider for font-weight -->
             <div class="font-slider-wrapper">
               <label for="font_slider">Font:</label>
@@ -81,7 +89,7 @@ console.log(e.target.value)
 				id="font_slider"
 				name="font-slider"
 				type="range"
-				min="1975"
+				min="1979"
 				max="2050"
 				value="1"
 				step="1"
@@ -90,20 +98,20 @@ console.log(e.target.value)
             </div>
 
             <!-- Edit sample -button (mobile version) -->
-            <button id="font_edit_mobile" type="button">Edit sample</button>
+            <!-- <button id="font_edit_mobile" type="button">Edit sample</button> -->
 
             <!-- Font-align selector -->
             <div class="font-align-wrapper">
-              <input class="font-align" type="radio" name="font-align" id="align-left" value="align-left">
+              <input class="font-align" type="radio" name="font-align" id="align-left" value="align-left" checked="">
               <label class="font-align" for="align-left"><img class="font-align-icon" src="../Assets/images/icon-align-left.svg" alt="Align left"></label>
 
-              <input class="font-align" type="radio" name="font-align" id="align-center" value="align-center" checked="">
+              <input class="font-align" type="radio" name="font-align" id="align-center" value="align-center" >
               <label class="font-align" for="align-center"><img class="font-align-icon" src="../Assets/images/icon-align-center.svg" alt="Align Right"></label>
 
               <input class="font-align" type="radio" name="font-align" id="align-right" value="align-right">
               <label class="font-align" for="align-right"><img class="font-align-icon" src="../Assets/images/icon-align-right.svg" alt="Align Center"></label>
             </div>
-
+            <div class="font-size-wrapper">
             <!-- Font-size -dropdown -->
             <label for="font_size_select">Font size:</label>
             <select name="font-size-select" id="font_size_select">
@@ -112,6 +120,7 @@ console.log(e.target.value)
               <option value="font-size-60px">60px</option>
               <option value="font-size-80px" style="display: initial;">80px</option>
             </select>
+        </div>
           </div>
         </div>
 <script type="text/javascript">
