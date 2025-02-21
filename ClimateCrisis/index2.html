@@ -221,7 +221,7 @@ console.log(e.target.value)
 
 
     // FONT ALIGNMENT
-    $('input[name="font-align"').on('input',function(){
+    $("input[name='font-align']").on('input',function(){
         var radioVal = $(this).val();
         
         // Text-align: left, right, center
@@ -292,9 +292,9 @@ console.log(e.target.value)
     };
 
 
-    modal.addEventListener("click", function(e) {
-        hideModal();
-    });
+    // modal.addEventListener("click", function(e) {
+    //     hideModal();
+    // });
     
     window.addEventListener('keydown', function(e) {
         if(e.code == "Escape" || e.which == 27) {
@@ -324,10 +324,10 @@ console.log(e.target.value)
     }
 
     // Scroll to top
-    document.getElementById("scrollTop").addEventListener("click", function() {
-        document.body.scrollTop = 0; // For Safari
-        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-    });
+    // document.getElementById("scrollTop").addEventListener("click", function() {
+    //     document.body.scrollTop = 0; // For Safari
+    //     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    // });
 
     // IE & Edge styling fix; add "IE" class to 
     if (document.documentMode || /Edge/.test(navigator.userAgent)) {
